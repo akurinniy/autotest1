@@ -1,0 +1,8 @@
+.idea/
+.gradle/
+build/
+*.xml
+*.log
+src/test/resources/
+/codestyles/
+/_windows/
