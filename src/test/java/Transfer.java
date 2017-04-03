@@ -10,12 +10,9 @@ import java.util.Random;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.switchTo;
 
 public class Transfer {
-
-    String mail = "kurinniy.a@ki-technology.ru";
-    String pass = "aktest";
-    String departure [] = {"kie", "mos", "pet","pari"};
 
     @Rule
     public TextReport textReport = new TextReport();
@@ -23,14 +20,19 @@ public class Transfer {
     static {
         Configuration.browser = "chrome";
         Configuration.baseUrl = "https://transfer.tickets.ua";
+        //Configuration.baseUrl = "transfer.tickets.ua.default.staging.ttndev.com";
         //Configuration.holdBrowserOpen = true;
         ChromeDriverManager.getInstance().setup();
-
 
     }
 
     @Test
     public void woAuthBook(){
+
+        String mail = "kurinniy.a@ki-technology.ru";
+        String pass = "aktest";
+        //String pass = "123456"; Staging password
+        String departure [] = {"kie", "mos", "pet","pari"};
 
         int randomIndex = new Random().nextInt(departure.length);
 
@@ -47,12 +49,13 @@ public class Transfer {
 
         $("[data-direction='departure']").sendKeys(departure[randomIndex]);
         $("[data-auto-controller='TransferMainController']").shouldBe(Condition.visible);
-        //$$("[data-uil='start_point'] li").findBy(Condition.text("ÐšÐ¸ÐµÐ² (Ð² Ñ‡ÐµÑ€Ñ‚Ðµ Ð³Ð¾Ñ€Ð¾Ð´Ð°)")).click();
+        //$$("[data-uil='start_point'] li").findBy(Condition.text("Êèåâ (â ÷åðòå ãîðîäà)")).click();
         $$("#ui-id-1 li").get(0).click();
         $$("#ui-id-2 li").get(0).click();
         $ ("[data-uil='submit_search']").click();
 
         // Transfer select
+
         $("[class='buy_button select_recommendation_button']").waitUntil(Condition.visible, 30000).click();
 
         // Transfer Details
@@ -119,8 +122,10 @@ public class Transfer {
         //My account
 
         $(".allert-block").waitUntil(Condition.visible, 30000);
-        $("input[.submit]").click();
-        $("a [.cancel_booking]").shouldBe(Condition.visible).click();
+        $(".allert-close").click();
+        $("a.cancel_booking").shouldBe(Condition.visible).click();
+        switchTo().alert().accept();
+        $("a.cancel_booking").shouldBe(Condition.hidden);
 */
     }
 
@@ -128,7 +133,7 @@ public class Transfer {
     public void simpleBookTest(){
 
         String mail = "kurinniy.a@ki-technology.ru";
-        String pass = "123456";
+        String pass = "aktest";
         String departure [] = {"kie", "mos", "pet","pari"};
 
         Selenide.open("");
@@ -144,11 +149,11 @@ public class Transfer {
 
         $("[data-direction='departure']").sendKeys("kie");
         $("[data-auto-controller='TransferMainController']").shouldBe(Condition.visible);
-        //$$("[data-uil='start_point'] li").findBy(Condition.text("ÐšÐ¸ÐµÐ² (Ð² Ñ‡ÐµÑ€Ñ‚Ðµ Ð³Ð¾Ñ€Ð¾Ð´Ð°)")).click();
-        $$("#ui-id-1 li").findBy(Condition.text("ÐšÐ¸ÐµÐ² (Ð²")).click();
-        $$("#ui-id-2 li").findBy(Condition.text("ÐÑÑ€Ð¾Ð¿Ð¾Ñ€Ñ‚ Ð‘Ð¾Ñ€Ð¸ÑÐ¿Ð¾Ð»ÑŒ (ÐšÐ¸ÐµÐ²)")).click();
+        //$$("[data-uil='start_point'] li").findBy(Condition.text("Êèåâ (â ÷åðòå ãîðîäà)")).click();
+        $$("#ui-id-1 li").findBy(Condition.text("Êèåâ (â")).click();
+        $$("#ui-id-2 li").findBy(Condition.text("Àýðîïîðò Áîðèñïîëü (Êèåâ)")).click();
         $ ("[data-uil='submit_search']").click();
-        $("[class='buy_button select_recommendation_button']").waitUntil(Condition.visible, 30000).click();
+        $(".buy_button.select_recommendation_button").waitUntil(Condition.visible, 30000).click();
         $("[name='route[0][from][date]']").click();
         $("[data-handler='next']").click();
         $("[data-handler='next']").click();
@@ -166,7 +171,7 @@ public class Transfer {
 
 
         // Login link authorisation
-        /* $("[class='login link']").findBy(Condition.text("ÐÐ²Ñ‚Ð¾Ñ€Ð¸Ð·ÑƒÐ¹Ñ‚ÐµÑÑŒ")).click();
+        /* $("[class='login link']").findBy(Condition.text("Àâòîðèçóéòåñü")).click();
         $("[class='popup_header']").shouldBe(Condition.visible);
         $("[data-uil='email']").shouldBe(Condition.visible);
         $$("[data-uil='email']").get(1).setValue(mail);
@@ -190,16 +195,17 @@ public class Transfer {
         $("[data-action='card-date_year']").setValue("19");
         $("[data-action='card-card_cvv']").setValue("571");
         $("[data-action='card-card_holder']").setValue("adsad fdgdfg");
-        //$(".paid_btn").click();
-        //$("#acceptIATA > div").hover().click();
-        //$(".paid_btn").click();
+        $(".paid_btn").click();
+        $("#acceptIATA > div").hover().click();
+        $(".paid_btn").click();
 
         //My account
-
+        //Configuration.holdBrowserOpen=true;
         $(".allert-block").waitUntil(Condition.visible, 30000);
-        $(".allert-block").pressEnter();
-        //$("input[.submit]").click();
-        $("a [.cancel_booking]").shouldBe(Condition.visible).click();
+        $(".allert-close").click();
+        $("a.cancel_booking").shouldBe(Condition.visible).click();
+        switchTo().alert().accept();
+        $("a.cancel_booking").shouldBe(Condition.hidden);
 /*
 
 if(){
@@ -213,15 +219,6 @@ if(){
 
  */
 
-
-        //  $("[data-uil='start_point']").sendKeys("lv");
-        // $("[data-uil='point_list']").shouldBe(Condition.visible);
-        // $$("[data-uil='point_list'] li").findBy(Condition.text("Ð›ÑŒÐ²Ð¾Ð²")).click();
-        // $("[data-uil='end_point']").sendKeys("jitomir");
-        // $("[data-uil='point_list']").shouldBe(Condition.hidden);
-        // $("[data-handler='next']").click();
-        // $$("[data-handler='selectDay']").get(50).click();
-        // $("[data-uil='submit_search']").click();
 
     }
 
