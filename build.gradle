@@ -1,0 +1,19 @@
+group 'autotest'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+compileTestJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+dependencies {
+    compile 'junit:junit:+'
+    compile 'com.codeborne:selenide:4.+'
+    compile 'io.github.bonigarcia:webdrivermanager:1.6.1'
+}

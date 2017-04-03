@@ -29,7 +29,7 @@ public class Car {
     @Test
     public void quicktest(){
         open("https://car.tickets.ua/search/booking_v2?session_id=58df860f9aaea333f600003a&car_id=58df86119aaea333f600003d");
-        $$("[class='field sex']").findBy(Condition.text("м")).click();
+        $$("[class='field sex']").findBy(Condition.text("m")).click();
 
         $("[class='booking_price_button'] input").click();
         //$("[id='acceptIATA'] class='iCheck-helper'").click();
