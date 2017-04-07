@@ -134,5 +134,23 @@ public class Car {
         $(".country_select ul>li", RandomUtils.nextInt(0, size)).scrollTo().click();
     }
 
+    @Test
+
+    public void validationTestCar() {
+
+        //Main page
+
+        open("");
+        $("[class='search_button']").click();
+        $(".if_error").isDisplayed();
+
+
+
+
+
+
+
+    }
+
 
 }
