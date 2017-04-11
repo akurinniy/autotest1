@@ -20,7 +20,6 @@ public class Transfer {
         //Configuration.baseUrl = "transfer.tickets.ua.default.staging.ttndev.com";
         //Configuration.holdBrowserOpen = true;
         ChromeDriverManager.getInstance().setup();
-
     }
 
     @Test
@@ -46,7 +45,7 @@ public class Transfer {
 
         $("[data-direction='departure']").sendKeys(departure[randomIndex]);
         $("[data-auto-controller='TransferMainController']").shouldBe(Condition.visible);
-        //$$("[data-uil='start_point'] li").findBy(Condition.text("Киев (в черте города)")).click();
+        //$$("[data-uil='start_point'] li").findBy(Condition.text("Киев (в черте города)5")).click();
         $$("#ui-id-1 li").get(0).click();
         $$("#ui-id-2 li").get(0).click();
         $ ("[data-uil='submit_search']").click();
@@ -136,6 +135,7 @@ public class Transfer {
         open("");
 
         // Link header login
+
         /*$("[data-action='link-header_login']").click();
         //$("[class='popup_header']").shouldBe(Condition.visible);
         $("#login_popup [data-uil='email']").setValue(mail);
@@ -167,6 +167,7 @@ public class Transfer {
 
 
         // Login link authorisation
+
         /* $("[class='login link']").findBy(Condition.text("Авторизуйтесь")).click();
         $("[class='popup_header']").shouldBe(Condition.visible);
         $("[data-uil='email']").shouldBe(Condition.visible);
@@ -175,6 +176,7 @@ public class Transfer {
         */
 
         // Enter registered email
+
         $("[id='email']").click();
         $("[id='email']").setValue(mail);
         $$("[id='pass']").findBy(Condition.visible).click();
@@ -196,6 +198,7 @@ public class Transfer {
         $(".paid_btn").click();
 
         //My account
+
         //Configuration.holdBrowserOpen=true;
         $(".allert-block").waitUntil(Condition.visible, 30000);
         $(".allert-close").click();
@@ -233,6 +236,7 @@ if(){
 
 
         //Result page
+
         $ (".change_search").click();
         $ ("[data-uil='swap']").click(); //SWAP button click ???
         $ ("[data-uil='submit_search']").click();
@@ -325,77 +329,6 @@ if(){
         int rand = new Random().nextInt(1000);
 
         open("https://transfer.tickets.ua/search/booking?session_id=03e9af9a6478fd7e5eacbc5817280ad5e6ac&search_id=712a76b56e974c2000f66d79078ceb47");
-
-        $(".paid_btn").click(); // buy button click
-        $("[id='airport_flight_number_0_error']").isDisplayed();
-        $("[name='route[0][from][flight_number]']").setValue("AS31234");
-        $(".paid_btn").click(); // buy button click
-        $("[id='airport_from_date_0_error']").isDisplayed();
-        $("[id='airport_from_date_0']").click();
-        $("[data-handler='next']").click();
-        $("[data-handler='next']").click();
-        $("[data-handler='next']").click();
-        $("[data-handler='next']").click();
-        $("[data-handler='next']").click();
-        $$("[data-handler='selectDay']").findBy(Condition.text("20")).click();
-        $(".paid_btn").click();
-        $("[id='airport_from_time_0_error']").isDisplayed();
-        $("[id='airport_from_time_0']").click();
-        $("[id='airport_from_time_0']").setValue("1700");
-        $(".paid_btn").click();
-        $("[id='in_city_to_address_0_error']").isDisplayed();
-        $("[name='route[0][to][address]']").click();
-        $("[name='route[0][to][address]']").setValue("auto test");
-        $(".paid_btn").click();
-        $("[id='name_error']").isDisplayed();
-        $("[data-error-info]").click();
-        $("[data-error-info]").sendKeys("test");
-        $(".paid_btn").click();
-        $("[id='phone_error']").isDisplayed();
-        $("[id='phone']").click();
-        $("[id='phone']").setValue("504405588");
-        $(".paid_btn").click();
-        $("[id='email_error']").isDisplayed();
-        $("[id='email']").click();
-        $("[id='email']").setValue("dfgfdgdfg");
-        $("[id='email_error']").isDisplayed();
-        $("[id='email']").click();
-        $("input[name='user[email]']").setValue("testak0" + rand + "@gmail.com"); // email validation
-        $(".paid_btn").click();
-        $("[id='card_number_1_error']").isDisplayed();
-        $("[data-action='card-card_number_0']").click();
-        $("[data-action='card-card_number_0']").setValue("4111");
-        $(".paid_btn").click();
-        $("[id='card_number_1_error']").isDisplayed();
-        $("[data-action='card-card_number_1']").click();
-        $("[data-action='card-card_number_1']").setValue("1111");
-        $(".paid_btn").click();
-        $("[id='card_number_1_error']").isDisplayed();
-        $("[data-action='card-card_number_2']").click();
-        $("[data-action='card-card_number_2']").setValue("1111");
-        $(".paid_btn").click();
-        $("[id='card_number_1_error']").isDisplayed();
-        $("[data-action='card-card_number_3']").click();
-        $("[data-action='card-card_number_3']").setValue("1111");
-        $(".paid_btn").click();
-        $("[id='card_date_month_error']").isDisplayed();
-        $("[data-action='card-date_month']").click();
-        $("[data-action='card-date_month']").setValue("10"); // Actual month
-        $(".paid_btn").click();
-        $("[id='card_date_year_error']").isDisplayed();
-        $("[data-action='card-date_year']").click();
-        $("[data-action='card-date_year']").setValue("19"); // Actual year
-        $(".paid_btn").click();
-        $("[id='card_cvv_error']").isDisplayed();
-        $("[data-action='card-card_cvv']").click();
-        $("[data-action='card-card_cvv']").setValue("514");
-        $(".paid_btn").click();
-        $("[id='card_holder_error']").isDisplayed();
-        $("[data-action='card-card_holder']").click();
-        $("[data-action='card-card_holder']").setValue("adsad fdgdfg");
-        $(".paid_btn").click();
-        $("[id='acceptIATA_error']").isDisplayed();
-
 
 
     }
