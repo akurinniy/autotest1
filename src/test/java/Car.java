@@ -144,12 +144,6 @@ public class Car {
         $("[class='search_button']").click();
         $(".if_error").isDisplayed();
 
-
-
-
-
-
-
     }
 
 
