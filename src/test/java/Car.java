@@ -12,30 +12,18 @@ import static com.codeborne.selenide.Selenide.*;
 public class Car {
 
     String mail = "kurinniy.a@ki-technology.ru";
-    //String pass = "aktest";
-    String pass = "123456"; // Staging password
+    String pass = "aktest";
+    //String pass = "123456"; // Staging password
 
     @Rule
     public TextReport textReport = new TextReport();
 
     static {
         Configuration.browser = "chrome";
-        //Configuration.baseUrl = "https://car.tickets.ua";
-        Configuration.baseUrl = "https://car.tickets.ua.default.staging.ttndev.com/";
+        Configuration.baseUrl = "https://car.tickets.ua";
+        //Configuration.baseUrl = "https://car.tickets.ua.default.staging.ttndev.com/";
         //Configuration.holdBrowserOpen = true;
         ChromeDriverManager.getInstance().setup();
-    }
-
-    @Test
-    public void quicktest(){
-        open("https://car.tickets.ru.default.staging.ttndev.com/en/search/booking_v2?session_id=58e24372d1b6d329190001bd&car_id=58e24375d1b6d329190001c1");
-        $("#passengers_gender-M").closest(".icheckbox_minimal").click();
-
-        $("[class='booking_price_button'] input").click();
-        //$("[id='acceptIATA'] class='iCheck-helper'").click();
-        //$("[id='agrement'] class='iCheck-helper'").click();
-        $("#acceptIATA > div").hover().click();
-
     }
 
     @Test
@@ -47,12 +35,17 @@ public class Car {
 
         //Search Form
 
+//        $(".country_select").click();
+//        int size = $$(".country_select ul>li").size();
+//        String country = $(".country_select ul>li", RandomUtils.nextInt(1, size)).getText();
+//        $(".country_select input").setValue(country).click();
+
+//        $(".country_select a").click();
+//        int size = $$(".country_select ul>li").size();
+//        $(".country_select ul>li", RandomUtils.nextInt(0, size)).scrollTo().click();
+
         $("[class='chosen-single chosen-default']").click();
-        //$("[class='chosen-single chosen-default']").setValue("алб");
-        //$("[class='chosen-search' input]").setValue("алб");
-        //$(".car_pu_country_id").shouldBe(Condition.visible);
         $("[data-option-array-index='3']").click();
-        //$$(".active-result result-selected highlighted'] li").findBy(Condition.text("Албания"));
         $("[id='pu_date']").click();
         $("[data-handler='next']").click();
         $("[data-handler='next']").click();

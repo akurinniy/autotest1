@@ -16,8 +16,8 @@ public class Transfer {
 
     static {
         Configuration.browser = "chrome";
-        Configuration.baseUrl = "https://transfer.tickets.ua";
-        //Configuration.baseUrl = "transfer.tickets.ua.default.staging.ttndev.com";
+        //Configuration.baseUrl = "https://transfer.tickets.ua";
+        Configuration.baseUrl = "https://transfer.tickets.ua.default.staging.ttndev.com";
         //Configuration.holdBrowserOpen = true;
         ChromeDriverManager.getInstance().setup();
     }
@@ -26,8 +26,8 @@ public class Transfer {
     public void woAuthBook(){
 
         String mail = "kurinniy.a@ki-technology.ru";
-        String pass = "aktest";
-        //String pass = "123456"; Staging password
+        //String pass = "aktest";
+        String pass = "123456"; //Staging password
         String departure [] = {"kie", "mos", "pet","pari"};
 
         int randomIndex = new Random().nextInt(departure.length);
@@ -70,7 +70,7 @@ public class Transfer {
             $("[id='airport_from_time_0']").click();
             $("[id='airport_from_time_0']").setValue("1700");
         }
-        /*if ($("[id='airport_from_date_0']").is(Condition.visible)) {
+        if ($("[id='airport_from_date_0']").is(Condition.visible)) {
             $("[id='airport_from_date_0']").click();
             $("[data-handler='next']").click();
             $("[data-handler='next']").click();
@@ -78,7 +78,7 @@ public class Transfer {
             $("[data-handler='next']").click();
             $("[data-handler='next']").click();
             $$("[data-handler='selectDay']").findBy(Condition.text("20")).click();
-        }*/
+        }
 
         if ($("[name='route[0][to][address]']").is(Condition.visible)) {
             $("[name='route[0][to][address]']").click();
@@ -103,7 +103,7 @@ public class Transfer {
 
         // Payment Form
 
-      /*  $("[data-action='card-card_number_0']").setValue("4111");
+        $("[data-action='card-card_number_0']").setValue("4111");
         $("[data-action='card-card_number_1']").setValue("1111");
         $("[data-action='card-card_number_2']").setValue("1111");
         $("[data-action='card-card_number_3']").setValue("1111");
@@ -122,15 +122,15 @@ public class Transfer {
         $("a.cancel_booking").shouldBe(Condition.visible).click();
         switchTo().alert().accept();
         $("a.cancel_booking").shouldBe(Condition.hidden);
-*/
+
     }
 
     @Test
     public void simpleBookTest(){
 
         String mail = "kurinniy.a@ki-technology.ru";
-        String pass = "aktest";
-
+        //String pass = "aktest";
+        String pass = "123456";// Staging password
 
         open("");
 
@@ -181,7 +181,7 @@ public class Transfer {
         $("[id='email']").setValue(mail);
         $$("[id='pass']").findBy(Condition.visible).click();
         $("[id='pass']").setValue(pass).pressEnter();
-        //$("[.form-submit]").click();
+
 
         // Payment Form
 
@@ -322,15 +322,5 @@ if(){
 
     }
 
-    @Test
-
-    public void quickTest(){
-
-        int rand = new Random().nextInt(1000);
-
-        open("https://transfer.tickets.ua/search/booking?session_id=03e9af9a6478fd7e5eacbc5817280ad5e6ac&search_id=712a76b56e974c2000f66d79078ceb47");
-
-
-    }
 
 }
