@@ -45,7 +45,7 @@ public class Transfer {
 
         $("[data-direction='departure']").sendKeys(departure[randomIndex]);
         $("[data-auto-controller='TransferMainController']").shouldBe(Condition.visible);
-        //$$("[data-uil='start_point'] li").findBy(Condition.text("Киев (в черте города)5")).click();
+        //$$("[data-uil='start_point'] li").findBy(Condition.text("Киев (в черте грода)")).click();
         $$("#ui-id-1 li").get(0).click();
         $$("#ui-id-2 li").get(0).click();
         $ ("[data-uil='submit_search']").click();
@@ -145,7 +145,7 @@ public class Transfer {
 
         $("[data-direction='departure']").sendKeys("kie");
         $("[data-auto-controller='TransferMainController']").shouldBe(Condition.visible);
-        //$$("[data-uil='start_point'] li").findBy(Condition.text("Киев (в черте города)")).click();
+        //$$("[data-uil='start_point'] li").findBy(Condition.text("Кие (в черте города)")).click();
         $$("#ui-id-1 li").findBy(Condition.text("Киев (в")).click();
         $$("#ui-id-2 li").findBy(Condition.text("Аэропорт Борисполь (Киев)")).click();
         $ ("[data-uil='submit_search']").click();
