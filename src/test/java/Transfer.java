@@ -45,7 +45,7 @@ public class Transfer {
 
         $("[data-direction='departure']").sendKeys(departure[randomIndex]);
         $("[data-auto-controller='TransferMainController']").shouldBe(Condition.visible);
-        //$$("[data-uil='start_point'] li").findBy(Condition.text(" ив (в черте грода)")).click();
+        //$$("[data-uil='start_point'] li").findBy(Condition.text(" иeв (в черте грода)")).click();
         $$("#ui-id-1 li").get(0).click();
         $$("#ui-id-2 li").get(0).click();
         $ ("[data-uil='submit_search']").click();
