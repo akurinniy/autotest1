@@ -45,7 +45,7 @@ public class Transfer {
 
         $("[data-direction='departure']").sendKeys(departure[randomIndex]);
         $("[data-auto-controller='TransferMainController']").shouldBe(Condition.visible);
-        //$$("[data-uil='start_point'] li").findBy(Condition.text("Киeв (в черте города)")).click();
+        //$$("[data-uil='start_point'] li").findBy(Condition.text("РљРёeРІ (РІ С‡РµСЂС‚Рµ РіСЂРѕРґР°)")).click();
         $$("#ui-id-1 li").get(0).click();
         $$("#ui-id-2 li").get(0).click();
         $ ("[data-uil='submit_search']").click();
@@ -145,9 +145,9 @@ public class Transfer {
 
         $("[data-direction='departure']").sendKeys("kie");
         $("[data-auto-controller='TransferMainController']").shouldBe(Condition.visible);
-        //$$("[data-uil='start_point'] li").findBy(Condition.text("Кие (в черте города)")).click();
-        $$("#ui-id-1 li").findBy(Condition.text("Киев (в")).click();
-        $$("#ui-id-2 li").findBy(Condition.text("Аэропорт Борисполь (Киев)")).click();
+        //$$("[data-uil='start_point'] li").findBy(Condition.text("РљРёРµ (РІ С‡РµСЂС‚Рµ РіРѕСЂРѕРґР°)")).click();
+        $$("#ui-id-1 li").findBy(Condition.text("РљРёРµРІ (РІ")).click();
+        $$("#ui-id-2 li").findBy(Condition.text("РђСЌСЂРѕРїРѕСЂС‚ Р‘РѕСЂРёСЃРїРѕР»СЊ (РљРёРµРІ)")).click();
         $ ("[data-uil='submit_search']").click();
         $(".buy_button.select_recommendation_button").waitUntil(Condition.visible, 30000).click();
         $("[name='route[0][from][date]']").click();
@@ -168,7 +168,7 @@ public class Transfer {
 
         // Login link authorisation
 
-        /* $("[class='login link']").findBy(Condition.text("Авторизуйтесь")).click();
+        /* $("[class='login link']").findBy(Condition.text("РђРІС‚РѕСЂРёР·СѓР№С‚РµСЃСЊ")).click();
         $("[class='popup_header']").shouldBe(Condition.visible);
         $("[data-uil='email']").shouldBe(Condition.visible);
         $$("[data-uil='email']").get(1).setValue(mail);
@@ -228,10 +228,10 @@ if(){
         $ ("[data-uil='submit_search']").click(); //search button click
         $("[id='from_name_error']").isDisplayed();
         $("[data-direction='departure']").sendKeys("kie");
-        $$("#ui-id-1 li").findBy(Condition.text("Киев (в")).click();
+        $$("#ui-id-1 li").findBy(Condition.text("РљРёРµРІ (РІ")).click();
         $ ("[data-uil='submit_search']").click(); //search button click
         $("[id='to_name_error']").isDisplayed();
-        $$("#ui-id-2 li").findBy(Condition.text("Аэропорт Борисполь (Киев)")).click();
+        $$("#ui-id-2 li").findBy(Condition.text("РђСЌСЂРѕРїРѕСЂС‚ Р‘РѕСЂРёСЃРїРѕР»СЊ (РљРёРµРІ)")).click();
         $ ("[data-uil='submit_search']").click();
 
 
