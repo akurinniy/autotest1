@@ -12,16 +12,16 @@ import static com.codeborne.selenide.Selenide.*;
 public class Car {
 
     String mail = "kurinniy.a@ki-technology.ru";
-    String pass = "aktest";
-    //String pass = "123456"; // Staging password
+    //String pass = "aktest";
+    String pass = "123456"; // Staging password
 
     @Rule
     public TextReport textReport = new TextReport();
 
     static {
         Configuration.browser = "chrome";
-        Configuration.baseUrl = "https://car.tickets.ua";
-        //Configuration.baseUrl = "https://car.tickets.ua.default.staging.ttndev.com/";
+        //Configuration.baseUrl = "https://car.tickets.ua";
+        Configuration.baseUrl = "https://car.tickets.ua.default.staging.ttndev.com/";
         //Configuration.holdBrowserOpen = true;
         ChromeDriverManager.getInstance().setup();
     }

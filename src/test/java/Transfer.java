@@ -1,7 +1,13 @@
+import Transfers.components.SearchForm;
+import Transfers.pages.PaymentPage;
+import Transfers.pages.ResultPage;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.junit.TextReport;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -12,18 +18,29 @@ import static com.codeborne.selenide.Selenide.*;
 public class Transfer {
 
     @Rule
-    public TextReport textReport = new TextReport();
+    public TextReport textReport = new TextReport().
+            onSucceededTest(true).
+            onSucceededTest(true);
 
-    static {
+    @Before
+        public void before(){
+
         Configuration.browser = "chrome";
         //Configuration.baseUrl = "https://transfer.tickets.ua";
-        Configuration.baseUrl = "https://transfer.tickets.ua.default.staging.ttndev.com";
+        Configuration.baseUrl = "https://transfer.tickets.ru.default.staging.ttndev.com";
         //Configuration.holdBrowserOpen = true;
         ChromeDriverManager.getInstance().setup();
+
+    }
+
+    @After
+        public void after(){
+        Selenide.clearBrowserCookies();
+
     }
 
     @Test
-    public void woAuthBook(){
+    public void woAuthBookForNewUser(){
 
         String mail = "kurinniy.a@ki-technology.ru";
         //String pass = "aktest";
@@ -32,12 +49,7 @@ public class Transfer {
 
         int randomIndex = new Random().nextInt(departure.length);
 
-        // int ran;
-        // ran = 100 + (int)(Math.random() * ((1000 - 100) + 1));
-
         int rand = new Random().nextInt(1000);
-
-        //Language:RUS
 
         // Search Form (random search)
 
@@ -142,7 +154,6 @@ public class Transfer {
         $("#login_popup [data-uil='password']").setValue(pass).pressEnter();
         */
 
-
         $("[data-direction='departure']").sendKeys("kie");
         $("[data-auto-controller='TransferMainController']").shouldBe(Condition.visible);
         //$$("[data-uil='start_point'] li").findBy(Condition.text("Кие (в черте города)")).click();
@@ -195,16 +206,16 @@ public class Transfer {
         $("[data-action='card-card_holder']").setValue("adsad fdgdfg");
         $(".paid_btn").click();
         $("#acceptIATA > div").hover().click();
-        $(".paid_btn").click();
+     //   $(".paid_btn").click();
 
         //My account
 
         //Configuration.holdBrowserOpen=true;
-        $(".allert-block").waitUntil(Condition.visible, 30000);
-        $(".allert-close").click();
-        $("a.cancel_booking").shouldBe(Condition.visible).click();
-        switchTo().alert().accept();
-        $("a.cancel_booking").shouldBe(Condition.hidden);
+     //   $(".allert-block").waitUntil(Condition.visible, 30000);
+     //   $(".allert-close").click();
+     //   $("a.cancel_booking").shouldBe(Condition.visible).click();
+     //   switchTo().alert().accept();
+     //   $("a.cancel_booking").shouldBe(Condition.hidden);
 /*
 if(){
     Transfer.methodName(); //if static method
@@ -215,11 +226,10 @@ if(){
 
 }
  */
-
     }
 
     @Test
-    public void validTestTrans(){
+    public void validFieldsTest(){
 
         int rand = new Random().nextInt(1000);
 
@@ -321,6 +331,152 @@ if(){
         $("[id='acceptIATA_error']").isDisplayed();
 
     }
+
+    @Test
+
+        public void simpleBookTestV2(){
+
+        open("");
+
+        new SearchForm().searchFormDefaultLocation();
+        new ResultPage().selectFirstTransfer();
+        PaymentPage paymentPage = new PaymentPage();
+        paymentPage.fillTransferDetailsToAirport();
+        paymentPage.fillContactDetailsForRegisteredUser();
+        paymentPage.fillPaymentData();
+    }
+
+    @Test
+
+        public void woAuthBookForNewUserV2(){
+
+        open("");
+
+            new SearchForm().searchFormRandomLocation();
+            new ResultPage().selectFirstTransfer();
+            PaymentPage paymentPage = new PaymentPage();
+            paymentPage.fillTransferDetailsForRandomSearch();
+            paymentPage.fillDataForNewUser();
+            paymentPage.fillPaymentData();
+
+    }
+
+    @Test
+
+        public void validFieldsTestV2() {
+
+            open("");
+
+          SearchForm SearchForm=   new SearchForm();
+                    /*ubmitSearch().
+                    *//*errorDisplay().*//*
+                    fillDeparture("kie");
+                    selectDefaultLocation1();
+                    submitSearch().
+                    errorDisplay().
+                    selectDefaultLocation2().
+                    submitSearch();*/
+
+
+            SearchForm.submitSearch();
+            SearchForm.errorDisplaied();
+            SearchForm.fillDeparture("kie");
+            SearchForm.selectDefaultLocation1();
+            SearchForm.errorDisplaied();
+            SearchForm.selectDefaultLocation2();
+            SearchForm.submitSearch();
+
+            ResultPage resultPage = new ResultPage();
+            resultPage.changeSearch();
+            resultPage.submitSearch();
+            resultPage.selectFirstTransfer();
+
+           /* PaymentPage paymentPage = new PaymentPage();
+            paymentPage
+*/
+
+        $$("[id*='_error']").shouldHaveSize(12);
+
+        $(".paid_btn").click(); // buy button click
+        $("[id='airport_flight_number_0_error']").isDisplayed();
+        //$("[name='route[0][from][flight_number]']").click();   //Flight number
+        $("[name='route[0][from][flight_number]']").setValue("AS31234");
+        $(".paid_btn").click(); // buy button click
+        $("[id='airport_from_date_0_error']").isDisplayed();
+        $(".paid_btn").click(); // buy button click
+        $("[id='airport_flight_number_0_error']").isDisplayed();
+        $("[name='route[0][from][flight_number]']").setValue("AS31234");
+        $(".paid_btn").click(); // buy button click
+        $("[id='airport_from_date_0_error']").isDisplayed();
+        $("[id='airport_from_date_0']").click();
+        $("[data-handler='next']").click();
+        $("[data-handler='next']").click();
+        $("[data-handler='next']").click();
+        $("[data-handler='next']").click();
+        $("[data-handler='next']").click();
+        $$("[data-handler='selectDay']").findBy(Condition.text("20")).click();
+        $(".paid_btn").click();
+        $("[id='airport_from_time_0_error']").isDisplayed();
+        $("[id='airport_from_time_0']").click();
+        $("[id='airport_from_time_0']").setValue("1700");
+        $(".paid_btn").click();
+        $("[id='in_city_to_address_0_error']").isDisplayed();
+        $("[name='route[0][to][address]']").click();
+        $("[name='route[0][to][address]']").setValue("auto test");
+        $(".paid_btn").click();
+        $("[id='name_error']").isDisplayed();
+        $("[data-error-info]").click();
+        $("[data-error-info]").sendKeys("test");
+        $(".paid_btn").click();
+        $("[id='phone_error']").isDisplayed();
+        $("[id='phone']").click();
+        $("[id='phone']").setValue("504405588");
+        $(".paid_btn").click();
+        $("[id='email_error']").isDisplayed();
+        $("[id='email']").click();
+        $("[id='email']").setValue("dfgfdgdfg");
+        $("[id='email_error']").isDisplayed();
+        $("[id='email']").click();
+        $("input[name='user[email]']").setValue("testak0" + 3652 + "@gmail.com");// email validation
+        $(".paid_btn").click();
+        $("[id='card_number_1_error']").isDisplayed();
+        $("[data-action='card-card_number_0']").click();
+        $("[data-action='card-card_number_0']").setValue("4111");
+        $(".paid_btn").click();
+        $("[id='card_number_1_error']").isDisplayed();
+        $("[data-action='card-card_number_1']").click();
+        $("[data-action='card-card_number_1']").setValue("1111");
+        $(".paid_btn").click();
+        $("[id='card_number_1_error']").isDisplayed();
+        $("[data-action='card-card_number_2']").click();
+        $("[data-action='card-card_number_2']").setValue("1111");
+        $(".paid_btn").click();
+        $("[id='card_number_1_error']").isDisplayed();
+        $("[data-action='card-card_number_3']").click();
+        $("[data-action='card-card_number_3']").setValue("1111");
+        $(".paid_btn").click();
+        $("[id='card_date_month_error']").isDisplayed();
+        $("[data-action='card-date_month']").click();
+        $("[data-action='card-date_month']").setValue("10"); // Actual month
+        $(".paid_btn").click();
+        $("[id='card_date_year_error']").isDisplayed();
+        $("[data-action='card-date_year']").click();
+        $("[data-action='card-date_year']").setValue("19"); // Actual year
+        $(".paid_btn").click();
+        $("[id='card_cvv_error']").isDisplayed();
+        $("[data-action='card-card_cvv']").click();
+        $("[data-action='card-card_cvv']").setValue("514");
+        $(".paid_btn").click();
+        $("[id='card_holder_error']").isDisplayed();
+        $("[data-action='card-card_holder']").click();
+        $("[data-action='card-card_holder']").setValue("adsad fdgdfg");
+        $(".paid_btn").click();
+        $("[id='acceptIATA_error']").isDisplayed();
+
+
+
+    }
+
 
 
 }
