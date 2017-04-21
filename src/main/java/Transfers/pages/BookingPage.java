@@ -1,6 +1,5 @@
 package Transfers.pages;
 
-import Transfers.components.SearchForm;
 import com.codeborne.selenide.Condition;
 
 import java.util.Random;
@@ -8,11 +7,17 @@ import java.util.Random;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class PaymentPage extends SearchForm {
+public class BookingPage {
+
+    public String fromTime = "#airport_from_time_0",
+                fromDate = "#airport_from_date_0";
+
+    public void errorShouldBeVisibleFor(String selector){
+        $(selector+"_error").shouldHave(Condition.visible);
+    }
 
     public void fillTransferDetailsForRandomSearch() {
 
-        $("[name='route[0][from][flight_number]']").click();   //Flight number
         $("[name='route[0][from][flight_number]']").setValue("AS31234");    //Flight number
         $("[id='airport_from_date_0']").click();
         $("[data-handler='next']").click();
@@ -23,7 +28,6 @@ public class PaymentPage extends SearchForm {
         $$("[data-handler='selectDay']").findBy(Condition.text("20")).click();
 
         if ($("[id='airport_from_time_0']").is(Condition.visible)){
-            $("[id='airport_from_time_0']").click();
             $("[id='airport_from_time_0']").setValue("1700");
         }
         if ($("[id='airport_from_date_0']").is(Condition.visible)) {
@@ -37,7 +41,6 @@ public class PaymentPage extends SearchForm {
         }
 
         if ($("[name='route[0][to][address]']").is(Condition.visible)) {
-            $("[name='route[0][to][address]']").click();
             $("[name='route[0][to][address]']").setValue("auto test");
         }
 
@@ -63,7 +66,6 @@ public class PaymentPage extends SearchForm {
         int rand = new Random().nextInt(1000);
 
 
-        $("input[name='user[name]']").click();
         $("input[name='user[name]']").setValue("Ivanov Ivan");
         $("input[name='user[phone]']").sendKeys("5044" + rand);
         $("input[name='user[email]']").sendKeys("testak0" + rand + "@gmail.com");

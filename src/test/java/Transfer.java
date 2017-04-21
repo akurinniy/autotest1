@@ -1,5 +1,5 @@
 import Transfers.components.SearchForm;
-import Transfers.pages.PaymentPage;
+import Transfers.pages.BookingPage;
 import Transfers.pages.ResultPage;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -256,7 +256,6 @@ if(){
 
         $(".paid_btn").click(); // buy button click
         $("[id='airport_flight_number_0_error']").isDisplayed();
-        //$("[name='route[0][from][flight_number]']").click();   //Flight number
         $("[name='route[0][from][flight_number]']").setValue("AS31234");
         $(".paid_btn").click(); // buy button click
         $("[id='airport_from_date_0_error']").isDisplayed();
@@ -273,63 +272,52 @@ if(){
         $("[data-handler='next']").click();
         $$("[data-handler='selectDay']").findBy(Condition.text("20")).click();
         $(".paid_btn").click();
-        $("[id='airport_from_time_0_error']").isDisplayed();
-        $("[id='airport_from_time_0']").click();
+        $("#airport_from_time_0_error").isDisplayed();
         $("[id='airport_from_time_0']").setValue("1700");
         $(".paid_btn").click();
         $("[id='in_city_to_address_0_error']").isDisplayed();
-        $("[name='route[0][to][address]']").click();
         $("[name='route[0][to][address]']").setValue("auto test");
         $(".paid_btn").click();
         $("[id='name_error']").isDisplayed();
         $("[data-error-info]").click();
+        //$("[id='in_city_address_0']").sendKeys("test");
         $("[data-error-info]").sendKeys("test");
         $(".paid_btn").click();
         $("[id='phone_error']").isDisplayed();
-        $("[id='phone']").click();
+        //$("[id='phone']").click();
         $("[id='phone']").setValue("504405588");
         $(".paid_btn").click();
         $("[id='email_error']").isDisplayed();
-        $("[id='email']").click();
+       //$("[id='email']").click();
         $("[id='email']").setValue("dfgfdgdfg");
         $("[id='email_error']").isDisplayed();
-        $("[id='email']").click();
         $("input[name='user[email]']").setValue("testak0" + rand + "@gmail.com");// email validation
         $(".paid_btn").click();
         $("[id='card_number_1_error']").isDisplayed();
-        $("[data-action='card-card_number_0']").click();
         $("[data-action='card-card_number_0']").setValue("4111");
         $(".paid_btn").click();
         $("[id='card_number_1_error']").isDisplayed();
-        $("[data-action='card-card_number_1']").click();
         $("[data-action='card-card_number_1']").setValue("1111");
         $(".paid_btn").click();
         $("[id='card_number_1_error']").isDisplayed();
-        $("[data-action='card-card_number_2']").click();
         $("[data-action='card-card_number_2']").setValue("1111");
         $(".paid_btn").click();
         $("[id='card_number_1_error']").isDisplayed();
-        $("[data-action='card-card_number_3']").click();
         $("[data-action='card-card_number_3']").setValue("1111");
         $(".paid_btn").click();
         $("[id='card_date_month_error']").isDisplayed();
-        $("[data-action='card-date_month']").click();
         $("[data-action='card-date_month']").setValue("10"); // Actual month
         $(".paid_btn").click();
         $("[id='card_date_year_error']").isDisplayed();
-        $("[data-action='card-date_year']").click();
         $("[data-action='card-date_year']").setValue("19"); // Actual year
         $(".paid_btn").click();
         $("[id='card_cvv_error']").isDisplayed();
-        $("[data-action='card-card_cvv']").click();
         $("[data-action='card-card_cvv']").setValue("514");
         $(".paid_btn").click();
         $("[id='card_holder_error']").isDisplayed();
-        $("[data-action='card-card_holder']").click();
         $("[data-action='card-card_holder']").setValue("adsad fdgdfg");
         $(".paid_btn").click();
         $("[id='acceptIATA_error']").isDisplayed();
-
     }
 
     @Test
@@ -340,10 +328,10 @@ if(){
 
         new SearchForm().searchFormDefaultLocation();
         new ResultPage().selectFirstTransfer();
-        PaymentPage paymentPage = new PaymentPage();
-        paymentPage.fillTransferDetailsToAirport();
-        paymentPage.fillContactDetailsForRegisteredUser();
-        paymentPage.fillPaymentData();
+        BookingPage bookingPage = new BookingPage();
+        bookingPage.fillTransferDetailsToAirport();
+        bookingPage.fillContactDetailsForRegisteredUser();
+        bookingPage.fillPaymentData();
     }
 
     @Test
@@ -354,10 +342,10 @@ if(){
 
             new SearchForm().searchFormRandomLocation();
             new ResultPage().selectFirstTransfer();
-            PaymentPage paymentPage = new PaymentPage();
-            paymentPage.fillTransferDetailsForRandomSearch();
-            paymentPage.fillDataForNewUser();
-            paymentPage.fillPaymentData();
+            BookingPage bookingPage = new BookingPage();
+            bookingPage.fillTransferDetailsForRandomSearch();
+            bookingPage.fillDataForNewUser();
+            bookingPage.fillPaymentData();
 
     }
 
@@ -367,16 +355,7 @@ if(){
 
             open("");
 
-          SearchForm SearchForm=   new SearchForm();
-                    /*ubmitSearch().
-                    *//*errorDisplay().*//*
-                    fillDeparture("kie");
-                    selectDefaultLocation1();
-                    submitSearch().
-                    errorDisplay().
-                    selectDefaultLocation2().
-                    submitSearch();*/
-
+          SearchForm SearchForm = new SearchForm();
 
             SearchForm.submitSearch();
             SearchForm.errorDisplaied();
@@ -391,15 +370,11 @@ if(){
             resultPage.submitSearch();
             resultPage.selectFirstTransfer();
 
-           /* PaymentPage paymentPage = new PaymentPage();
-            paymentPage
-*/
 
-        $$("[id*='_error']").shouldHaveSize(12);
+      //  $$("[id*='_error']").shouldHaveSize(12);
 
         $(".paid_btn").click(); // buy button click
         $("[id='airport_flight_number_0_error']").isDisplayed();
-        //$("[name='route[0][from][flight_number]']").click();   //Flight number
         $("[name='route[0][from][flight_number]']").setValue("AS31234");
         $(".paid_btn").click(); // buy button click
         $("[id='airport_from_date_0_error']").isDisplayed();
@@ -417,11 +392,9 @@ if(){
         $$("[data-handler='selectDay']").findBy(Condition.text("20")).click();
         $(".paid_btn").click();
         $("[id='airport_from_time_0_error']").isDisplayed();
-        $("[id='airport_from_time_0']").click();
         $("[id='airport_from_time_0']").setValue("1700");
         $(".paid_btn").click();
         $("[id='in_city_to_address_0_error']").isDisplayed();
-        $("[name='route[0][to][address]']").click();
         $("[name='route[0][to][address]']").setValue("auto test");
         $(".paid_btn").click();
         $("[id='name_error']").isDisplayed();
@@ -473,6 +446,7 @@ if(){
         $(".paid_btn").click();
         $("[id='acceptIATA_error']").isDisplayed();
 
+        BookingPage bookingPage = new BookingPage();
 
 
     }

@@ -16,7 +16,6 @@ public class ResultPage extends SearchForm {
     public void changeSearch() {
         $ (".change_search").click();
         $ ("[data-uil='swap']").click(); //SWAP button click ???
-
     }
 
 
