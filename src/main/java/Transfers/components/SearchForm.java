@@ -63,18 +63,6 @@ public class SearchForm {
         return this;
     }
 
-    public SearchForm errorDisplaied() {
 
-        // $("[id='from_name_error']").is(Condition.visible);
-        // $("[id='to_name_error']").is(Condition.visible);
-        //$("[id='from_name_error']").isDisplayed();
-        //$("[id='to_name_error']").isDisplayed();
-
-        if ($("[id='from_name_error']").isDisplayed()) {
-
-        }
-
-        return this;
-    }
 
 }

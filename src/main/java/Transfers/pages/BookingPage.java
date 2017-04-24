@@ -83,10 +83,14 @@ public class BookingPage {
         $("[data-action='card-date_year']").setValue("19");
         $("[data-action='card-card_cvv']").setValue("571");
         $("[data-action='card-card_holder']").setValue("adsad fdgdfg");
-        $(".paid_btn").click();
+        pushPayButton();
         $("#acceptIATA > div").hover().click();
-        //$(".paid_btn").click();
+        //pushPayButton();
 
+    }
+
+    public void pushPayButton() {
+        $(".paid_btn").click();
 
     }
 

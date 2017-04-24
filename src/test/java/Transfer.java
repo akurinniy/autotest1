@@ -1,3 +1,4 @@
+import Transfers.components.ErrorPopup;
 import Transfers.components.SearchForm;
 import Transfers.pages.BookingPage;
 import Transfers.pages.ResultPage;
@@ -26,8 +27,8 @@ public class Transfer {
         public void before(){
 
         Configuration.browser = "chrome";
-        //Configuration.baseUrl = "https://transfer.tickets.ua";
-        Configuration.baseUrl = "https://transfer.tickets.ru.default.staging.ttndev.com";
+        Configuration.baseUrl = "https://transfer.tickets.ua";
+        //Configuration.baseUrl = "https://transfer.tickets.ru.default.staging.ttndev.com";
         //Configuration.holdBrowserOpen = true;
         ChromeDriverManager.getInstance().setup();
 
@@ -358,10 +359,10 @@ if(){
           SearchForm SearchForm = new SearchForm();
 
             SearchForm.submitSearch();
-            SearchForm.errorDisplaied();
-            SearchForm.fillDeparture("kie");
-            SearchForm.selectDefaultLocation1();
-            SearchForm.errorDisplaied();
+            SearchForm.
+            fillDeparture("kie").
+            selectDefaultLocation1();
+            new ErrorPopup().errorPopupDisplay();
             SearchForm.selectDefaultLocation2();
             SearchForm.submitSearch();
 
@@ -370,15 +371,15 @@ if(){
             resultPage.submitSearch();
             resultPage.selectFirstTransfer();
 
+            BookingPage bookingPage = new BookingPage();
+            bookingPage.pushPayButton();
+            new ErrorPopup().errorPopupDisplay();
 
-      //  $$("[id*='_error']").shouldHaveSize(12);
-
-        $(".paid_btn").click(); // buy button click
-        $("[id='airport_flight_number_0_error']").isDisplayed();
         $("[name='route[0][from][flight_number]']").setValue("AS31234");
-        $(".paid_btn").click(); // buy button click
+        bookingPage.pushPayButton();
         $("[id='airport_from_date_0_error']").isDisplayed();
-        $(".paid_btn").click(); // buy button click
+        bookingPage.pushPayButton();
+      /*
         $("[id='airport_flight_number_0_error']").isDisplayed();
         $("[name='route[0][from][flight_number]']").setValue("AS31234");
         $(".paid_btn").click(); // buy button click
@@ -448,7 +449,7 @@ if(){
 
         BookingPage bookingPage = new BookingPage();
 
-
+*/
     }
 
 

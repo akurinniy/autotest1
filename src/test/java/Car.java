@@ -12,16 +12,16 @@ import static com.codeborne.selenide.Selenide.*;
 public class Car {
 
     String mail = "kurinniy.a@ki-technology.ru";
-    //String pass = "aktest";
-    String pass = "123456"; // Staging password
+    String pass = "aktest";
+    //String pass = "123456"; // Staging password
 
     @Rule
     public TextReport textReport = new TextReport();
 
     static {
         Configuration.browser = "chrome";
-        //Configuration.baseUrl = "https://car.tickets.ua";
-        Configuration.baseUrl = "https://car.tickets.ua.default.staging.ttndev.com/";
+        Configuration.baseUrl = "https://car.tickets.ua";
+        //Configuration.baseUrl = "https://car.tickets.ua.default.staging.ttndev.com/";
         //Configuration.holdBrowserOpen = true;
         ChromeDriverManager.getInstance().setup();
     }
@@ -103,9 +103,9 @@ public class Car {
 
         $("[class='booking_price_button'] input").click();
         $("#acceptIATA > div").hover().click();
-        $("[class='booking_price_button'] input").click();
-        $(".btn cancel js-magnific-link").shouldBe(Condition.visible).click();
-        $(".popup_cancel__confirm").shouldBe(Condition.visible).click();
+        //$("[class='booking_price_button'] input").click();
+        //$(".btn cancel js-magnific-link").shouldBe(Condition.visible).click();
+        //$(".popup_cancel__confirm").shouldBe(Condition.visible).click();
 
     }
 
