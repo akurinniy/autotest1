@@ -1,3 +1,5 @@
+package Transfers;
+
 import Transfers.components.ErrorPopup;
 import Transfers.components.SearchForm;
 import Transfers.pages.BookingPage;
@@ -16,7 +18,7 @@ import java.util.Random;
 
 import static com.codeborne.selenide.Selenide.*;
 
-public class Transfer {
+public class Transfer extends BaseTest {
 
     @Rule
     public TextReport textReport = new TextReport().
@@ -63,11 +65,11 @@ public class Transfer {
         $$("#ui-id-2 li").get(0).click();
         $ ("[data-uil='submit_search']").click();
 
-        // Transfer select
+        // Transfers.Transfer select
 
         $("[class='buy_button select_recommendation_button']").waitUntil(Condition.visible, 30000).click();
 
-        // Transfer Details
+        // Transfers.Transfer Details
 
         $("[name='route[0][from][flight_number]']").click();   //Flight number
         $("[name='route[0][from][flight_number]']").setValue("AS31234");    //Flight number
@@ -219,9 +221,9 @@ public class Transfer {
      //   $("a.cancel_booking").shouldBe(Condition.hidden);
 /*
 if(){
-    Transfer.methodName(); //if static method
-    new Transfer().methodName(); //if not static
-    Transfer trns = new Transfer(7); //if not static and need more methods from class
+    Transfers.Transfer.methodName(); //if static method
+    new Transfers.Transfer().methodName(); //if not static
+    Transfers.Transfer trns = new Transfers.Transfer(7); //if not static and need more methods from class
     trns.methodName();
 } else{
 
@@ -329,10 +331,10 @@ if(){
 
         new SearchForm().searchFormDefaultLocation();
         new ResultPage().selectFirstTransfer();
-        BookingPage bookingPage = new BookingPage();
-        bookingPage.fillTransferDetailsToAirport();
-        bookingPage.fillContactDetailsForRegisteredUser();
-        bookingPage.fillPaymentData();
+        BookingPage bookingPage = new BookingPage()
+        .fillTransferDetailsToAirport()
+        .fillContactDetailsForRegisteredUser()
+        .fillPaymentData();
     }
 
     @Test
@@ -343,10 +345,10 @@ if(){
 
             new SearchForm().searchFormRandomLocation();
             new ResultPage().selectFirstTransfer();
-            BookingPage bookingPage = new BookingPage();
-            bookingPage.fillTransferDetailsForRandomSearch();
-            bookingPage.fillDataForNewUser();
-            bookingPage.fillPaymentData();
+            BookingPage bookingPage = new BookingPage()
+            .fillTransferDetailsForRandomSearch()
+            .fillDataForNewUser()
+            .fillPaymentData();
 
     }
 
@@ -354,7 +356,9 @@ if(){
 
         public void validFieldsTestV2() {
 
-            open("");
+            int rand = new Random().nextInt(1000);
+
+        open("");
 
           SearchForm SearchForm = new SearchForm();
 
@@ -372,84 +376,73 @@ if(){
             resultPage.selectFirstTransfer();
 
             BookingPage bookingPage = new BookingPage();
+            ErrorPopup errorPopup = new ErrorPopup();
+
             bookingPage.pushPayButton();
-            new ErrorPopup().errorPopupDisplay();
+            errorPopup.errorPopupDisplay();
+            $("[name='route[0][from][flight_number]']").setValue("AS31234");
+            bookingPage.pushPayButton();
+            errorPopup.errorPopupDisplay();
+            bookingPage.pushPayButton();
+            errorPopup.errorPopupDisplay();
+            $("[name='route[0][from][flight_number]']").setValue("AS31234");
+            bookingPage.pushPayButton();
+            errorPopup.errorPopupDisplay();
+            bookingPage.selectNextMonthDataPicker();
+            bookingPage.selectNextMonthDataPicker();
+            bookingPage.selectNextMonthDataPicker();
+            bookingPage.selectNextMonthDataPicker();
+            bookingPage.selectNextMonthDataPicker();
+            $$("[data-handler='selectDay']").findBy(Condition.text("20")).click();
+            bookingPage.pushPayButton();
+            errorPopup.errorPopupDisplay();
+            $("[id='airport_from_time_0']").setValue("1700");
+            bookingPage.pushPayButton();
+            errorPopup.errorPopupDisplay();
+            $("[name='route[0][to][address]']").setValue("auto test");
+            bookingPage.pushPayButton();
+            errorPopup.errorPopupDisplay();
 
-        $("[name='route[0][from][flight_number]']").setValue("AS31234");
-        bookingPage.pushPayButton();
-        $("[id='airport_from_date_0_error']").isDisplayed();
-        bookingPage.pushPayButton();
-      /*
-        $("[id='airport_flight_number_0_error']").isDisplayed();
-        $("[name='route[0][from][flight_number]']").setValue("AS31234");
-        $(".paid_btn").click(); // buy button click
-        $("[id='airport_from_date_0_error']").isDisplayed();
-        $("[id='airport_from_date_0']").click();
-        $("[data-handler='next']").click();
-        $("[data-handler='next']").click();
-        $("[data-handler='next']").click();
-        $("[data-handler='next']").click();
-        $("[data-handler='next']").click();
-        $$("[data-handler='selectDay']").findBy(Condition.text("20")).click();
-        $(".paid_btn").click();
-        $("[id='airport_from_time_0_error']").isDisplayed();
-        $("[id='airport_from_time_0']").setValue("1700");
-        $(".paid_btn").click();
-        $("[id='in_city_to_address_0_error']").isDisplayed();
-        $("[name='route[0][to][address]']").setValue("auto test");
-        $(".paid_btn").click();
-        $("[id='name_error']").isDisplayed();
-        $("[data-error-info]").click();
-        $("[data-error-info]").sendKeys("test");
-        $(".paid_btn").click();
-        $("[id='phone_error']").isDisplayed();
-        $("[id='phone']").click();
-        $("[id='phone']").setValue("504405588");
-        $(".paid_btn").click();
-        $("[id='email_error']").isDisplayed();
-        $("[id='email']").click();
-        $("[id='email']").setValue("dfgfdgdfg");
-        $("[id='email_error']").isDisplayed();
-        $("[id='email']").click();
-        $("input[name='user[email]']").setValue("testak0" + 3652 + "@gmail.com");// email validation
-        $(".paid_btn").click();
-        $("[id='card_number_1_error']").isDisplayed();
-        $("[data-action='card-card_number_0']").click();
-        $("[data-action='card-card_number_0']").setValue("4111");
-        $(".paid_btn").click();
-        $("[id='card_number_1_error']").isDisplayed();
-        $("[data-action='card-card_number_1']").click();
-        $("[data-action='card-card_number_1']").setValue("1111");
-        $(".paid_btn").click();
-        $("[id='card_number_1_error']").isDisplayed();
-        $("[data-action='card-card_number_2']").click();
-        $("[data-action='card-card_number_2']").setValue("1111");
-        $(".paid_btn").click();
-        $("[id='card_number_1_error']").isDisplayed();
-        $("[data-action='card-card_number_3']").click();
-        $("[data-action='card-card_number_3']").setValue("1111");
-        $(".paid_btn").click();
-        $("[id='card_date_month_error']").isDisplayed();
-        $("[data-action='card-date_month']").click();
-        $("[data-action='card-date_month']").setValue("10"); // Actual month
-        $(".paid_btn").click();
-        $("[id='card_date_year_error']").isDisplayed();
-        $("[data-action='card-date_year']").click();
-        $("[data-action='card-date_year']").setValue("19"); // Actual year
-        $(".paid_btn").click();
-        $("[id='card_cvv_error']").isDisplayed();
-        $("[data-action='card-card_cvv']").click();
-        $("[data-action='card-card_cvv']").setValue("514");
-        $(".paid_btn").click();
-        $("[id='card_holder_error']").isDisplayed();
-        $("[data-action='card-card_holder']").click();
-        $("[data-action='card-card_holder']").setValue("adsad fdgdfg");
-        $(".paid_btn").click();
-        $("[id='acceptIATA_error']").isDisplayed();
+           // $("[data-error-info]").click();
+            $("[id='in_city_address_0']").setValue("test");
+            $("[data-error-info]").setValue("test");
 
-        BookingPage bookingPage = new BookingPage();
+            bookingPage.pushPayButton();
+            errorPopup.errorPopupDisplay();
+            $("[id='phone']").setValue("504405588");
 
-*/
+            bookingPage.pushPayButton();
+            errorPopup.errorPopupDisplay();
+            $("[id='email']").setValue("dfgfdgdfg");
+            errorPopup.errorPopupDisplay();
+            $("input[name='user[email]']").setValue("testak0" + rand + "@gmail.com");// email validation
+            bookingPage.pushPayButton();
+            errorPopup.errorPopupDisplay();
+            $("[data-action='card-card_number_0']").setValue("4111");
+            bookingPage.pushPayButton();
+            errorPopup.errorPopupDisplay();
+            $("[data-action='card-card_number_0']").setValue("1111");
+            bookingPage.pushPayButton();
+            errorPopup.errorPopupDisplay();
+            $("[data-action='card-card_number_0']").setValue("1111");
+            bookingPage.pushPayButton();
+            errorPopup.errorPopupDisplay();
+            $("[data-action='card-card_number_0']").setValue("1111");
+            bookingPage.pushPayButton();
+            errorPopup.errorPopupDisplay();
+            $("[data-action='card-date_month']").setValue("10");
+            bookingPage.pushPayButton();
+            errorPopup.errorPopupDisplay();
+            $("[data-action='card-date_year']").setValue("19");
+            bookingPage.pushPayButton();
+            errorPopup.errorPopupDisplay();
+            $("[data-action='card-card_cvv']").setValue("514");
+            bookingPage.pushPayButton();
+            errorPopup.errorPopupDisplay();
+            $("[data-action='card-card_holder']").setValue("adsad fdgdfg");
+            bookingPage.pushPayButton();
+            errorPopup.errorPopupDisplay();
+
     }
 
 

@@ -16,15 +16,15 @@ public class BookingPage {
         $(selector+"_error").shouldHave(Condition.visible);
     }
 
-    public void fillTransferDetailsForRandomSearch() {
+    public BookingPage fillTransferDetailsForRandomSearch() {
 
         $("[name='route[0][from][flight_number]']").setValue("AS31234");    //Flight number
         $("[id='airport_from_date_0']").click();
-        $("[data-handler='next']").click();
-        $("[data-handler='next']").click();
-        $("[data-handler='next']").click();
-        $("[data-handler='next']").click();
-        $("[data-handler='next']").click();
+        selectNextMonthDataPicker();
+        selectNextMonthDataPicker();
+        selectNextMonthDataPicker();
+        selectNextMonthDataPicker();
+        selectNextMonthDataPicker();
         $$("[data-handler='selectDay']").findBy(Condition.text("20")).click();
 
         if ($("[id='airport_from_time_0']").is(Condition.visible)){
@@ -32,36 +32,34 @@ public class BookingPage {
         }
         if ($("[id='airport_from_date_0']").is(Condition.visible)) {
             $("[id='airport_from_date_0']").click();
-            $("[data-handler='next']").click();
-            $("[data-handler='next']").click();
-            $("[data-handler='next']").click();
-            $("[data-handler='next']").click();
-            $("[data-handler='next']").click();
+            selectNextMonthDataPicker();
+            selectNextMonthDataPicker();
+            selectNextMonthDataPicker();
+            selectNextMonthDataPicker();
+            selectNextMonthDataPicker();
             $$("[data-handler='selectDay']").findBy(Condition.text("20")).click();
         }
 
         if ($("[name='route[0][to][address]']").is(Condition.visible)) {
             $("[name='route[0][to][address]']").setValue("auto test");
         }
-
+        return this;
     }
 
-    public void fillContactDetailsForRegisteredUser() {
+    public BookingPage fillContactDetailsForRegisteredUser() {
 
         String mail = "kurinniy.a@ki-technology.ru";
         //String pass = "aktest";
         String pass = "123456";// Staging password
 
-        // Enter registered email
-
         $("[id='email']").click();
         $("[id='email']").setValue(mail);
         $$("[id='pass']").findBy(Condition.visible).click();
         $("[id='pass']").setValue(pass).pressEnter();
-
+        return this;
     }
 
-    public void fillDataForNewUser() {
+    public BookingPage fillDataForNewUser() {
 
         int rand = new Random().nextInt(1000);
 
@@ -70,59 +68,75 @@ public class BookingPage {
         $("input[name='user[phone]']").sendKeys("5044" + rand);
         $("input[name='user[email]']").sendKeys("testak0" + rand + "@gmail.com");
         $("[name='user[note]']").setValue("test book");
-
+        return this;
     }
 
-    public void fillPaymentData() {
+    public BookingPage fillTestCardNumber(){
+        String cardNumber1 = "4111";
+        String cardNumber2 = "1111";
+        String cardMonth = "10";
+        String cardYear = "20";
+        String cardCVV = "579";
+        String cardCardHolder = "adsad fdgdfg";
 
-        $("[data-action='card-card_number_0']").setValue("4111");
-        $("[data-action='card-card_number_1']").setValue("1111");
-        $("[data-action='card-card_number_2']").setValue("1111");
-        $("[data-action='card-card_number_3']").setValue("1111");
-        $("[data-action='card-date_month']").setValue("10");
-        $("[data-action='card-date_year']").setValue("19");
-        $("[data-action='card-card_cvv']").setValue("571");
-        $("[data-action='card-card_holder']").setValue("adsad fdgdfg");
+        $("[data-action='card-card_number_0']").setValue(cardNumber1);
+        $("[data-action='card-card_number_1']").setValue(cardNumber2);
+        $("[data-action='card-card_number_2']").setValue(cardNumber2);
+        $("[data-action='card-card_number_3']").setValue(cardNumber2);
+        $("[data-action='card-date_month']").setValue(cardMonth);
+        $("[data-action='card-date_year']").setValue(cardYear);
+        $("[data-action='card-card_cvv']").setValue(cardCVV);
+        $("[data-action='card-card_holder']").setValue(cardCardHolder);
+        return this;
+    }
+
+    public BookingPage fillPaymentData() {
+
+        fillTestCardNumber();
         pushPayButton();
         $("#acceptIATA > div").hover().click();
         //pushPayButton();
-
+        return this;
     }
 
-    public void pushPayButton() {
+    public BookingPage pushPayButton() {
         $(".paid_btn").click();
-
+        return this;
     }
 
-    public void selectNextMonthDataPicker() {
+    public BookingPage selectNextMonthDataPicker() {
 
-        $("[data-handler='next']").click();
-        $("[data-handler='next']").click();
-        $("[data-handler='next']").click();
-        $("[data-handler='next']").click();
+        $("[id='airport_from_date_0']").click();
         $("[data-handler='next']").click();
 
+        return this;
     }
 
-    public void selectDateDataPicker() {
+    public BookingPage selectDateDataPicker() {
 
         $$("[data-handler='selectDay']").findBy(Condition.text("24")).click();
+        return this;
     }
 
-    public void setTransferInCityFromTime () {
+    public BookingPage setTransferInCityFromTime () {
         $("input[id*='in_city_from_time']").click();
         $("input[id*='in_city_from_time']").setValue("1200");
+        return this;
     }
 
-    public void setAirportToTime() {
+    public BookingPage setAirportToTime() {
         $("input[id*='airport_to_time']").click();
         $("input[id*='airport_to_time']").setValue("1700");
-
+        return this;
     }
 
-    public void fillTransferDetailsToAirport() {
+    public BookingPage fillTransferDetailsToAirport() {
 
         $("[name='route[0][from][date]']").click();
+        selectNextMonthDataPicker();
+        selectNextMonthDataPicker();
+        selectNextMonthDataPicker();
+        selectNextMonthDataPicker();
         selectNextMonthDataPicker();
         selectDateDataPicker();
         setTransferInCityFromTime();
@@ -130,6 +144,8 @@ public class BookingPage {
         $("[id='airport_to_date_0']").click();
         selectDateDataPicker();
         setAirportToTime();
+
+        return this;
     }
 
 }
