@@ -20,7 +20,7 @@ public class CinemaTests extends BaseTest {
 
     @Test
     public void simpleBookTicketsUaV1(){
-        $("[.'m-info__controls' .'more-link']").click();
+        $("[. 'm-info__controls' .'more-link']").click();
 
 
     }
