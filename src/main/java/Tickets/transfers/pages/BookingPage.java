@@ -1,4 +1,4 @@
-package Transfers.pages;
+package Tickets.transfers.pages;
 
 import com.codeborne.selenide.Condition;
 
@@ -9,12 +9,6 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class BookingPage {
 
-    public String fromTime = "#airport_from_time_0",
-                fromDate = "#airport_from_date_0";
-
-    public void errorShouldBeVisibleFor(String selector){
-        $(selector+"_error").shouldHave(Condition.visible);
-    }
 
     public BookingPage fillTransferDetailsForRandomSearch() {
 
@@ -95,7 +89,7 @@ public class BookingPage {
         fillTestCardNumber();
         pushPayButton();
         $("#acceptIATA > div").hover().click();
-        //pushPayButton();
+        pushPayButton();
         return this;
     }
 

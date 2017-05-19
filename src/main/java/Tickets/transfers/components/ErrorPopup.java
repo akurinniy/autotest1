@@ -1,4 +1,4 @@
-package Transfers.components;
+package Tickets.transfers.components;
 
 import com.codeborne.selenide.Condition;
 

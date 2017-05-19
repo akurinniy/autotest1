@@ -1,9 +1,10 @@
-package Transfers;
+package Tickets.transfers;
 
-import Transfers.components.ErrorPopup;
-import Transfers.components.SearchForm;
-import Transfers.pages.BookingPage;
-import Transfers.pages.ResultPage;
+import Tickets.BaseTest;
+import Tickets.transfers.components.ErrorPopup;
+import Tickets.transfers.components.SearchForm;
+import Tickets.transfers.pages.BookingPage;
+import Tickets.transfers.pages.ResultPage;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
@@ -18,7 +19,7 @@ import java.util.Random;
 
 import static com.codeborne.selenide.Selenide.*;
 
-public class Transfer extends BaseTest {
+public class TransferTests extends BaseTest {
 
     @Rule
     public TextReport textReport = new TextReport().
@@ -65,11 +66,11 @@ public class Transfer extends BaseTest {
         $$("#ui-id-2 li").get(0).click();
         $ ("[data-uil='submit_search']").click();
 
-        // Transfers.Transfer select
+        // Tickets.Transfers.Transfer select
 
         $("[class='buy_button select_recommendation_button']").waitUntil(Condition.visible, 30000).click();
 
-        // Transfers.Transfer Details
+        // Tickets.Transfers.Transfer Details
 
         $("[name='route[0][from][flight_number]']").click();   //Flight number
         $("[name='route[0][from][flight_number]']").setValue("AS31234");    //Flight number
@@ -144,8 +145,8 @@ public class Transfer extends BaseTest {
     public void simpleBookTest(){
 
         String mail = "kurinniy.a@ki-technology.ru";
-        //String pass = "aktest";
-        String pass = "123456";// Staging password
+        String pass = "aktest";
+        //String pass = "123456";// Staging password
 
         open("");
 
@@ -209,21 +210,21 @@ public class Transfer extends BaseTest {
         $("[data-action='card-card_holder']").setValue("adsad fdgdfg");
         $(".paid_btn").click();
         $("#acceptIATA > div").hover().click();
-     //   $(".paid_btn").click();
+       $(".paid_btn").click();
 
         //My account
 
         //Configuration.holdBrowserOpen=true;
-     //   $(".allert-block").waitUntil(Condition.visible, 30000);
-     //   $(".allert-close").click();
-     //   $("a.cancel_booking").shouldBe(Condition.visible).click();
-     //   switchTo().alert().accept();
-     //   $("a.cancel_booking").shouldBe(Condition.hidden);
+        $(".allert-block").waitUntil(Condition.visible, 30000);
+        $(".allert-close").click();
+        $("a.cancel_booking").shouldBe(Condition.visible).click();
+        switchTo().alert().accept();
+        $("a.cancel_booking").shouldBe(Condition.hidden);
 /*
 if(){
-    Transfers.Transfer.methodName(); //if static method
-    new Transfers.Transfer().methodName(); //if not static
-    Transfers.Transfer trns = new Transfers.Transfer(7); //if not static and need more methods from class
+    Tickets.Transfers.Transfer.methodName(); //if static method
+    new Tickets.Transfers.Transfer().methodName(); //if not static
+    Tickets.Transfers.Transfer trns = new Tickets.Transfers.Transfer(7); //if not static and need more methods from class
     trns.methodName();
 } else{
 
@@ -321,6 +322,7 @@ if(){
         $("[data-action='card-card_holder']").setValue("adsad fdgdfg");
         $(".paid_btn").click();
         $("[id='acceptIATA_error']").isDisplayed();
+
     }
 
     @Test
@@ -388,11 +390,11 @@ if(){
             $("[name='route[0][from][flight_number]']").setValue("AS31234");
             bookingPage.pushPayButton();
             errorPopup.errorPopupDisplay();
-            bookingPage.selectNextMonthDataPicker();
-            bookingPage.selectNextMonthDataPicker();
-            bookingPage.selectNextMonthDataPicker();
-            bookingPage.selectNextMonthDataPicker();
-            bookingPage.selectNextMonthDataPicker();
+            bookingPage.selectNextMonthDataPicker()
+            .selectNextMonthDataPicker()
+            .selectNextMonthDataPicker()
+            .selectNextMonthDataPicker()
+            .selectNextMonthDataPicker();
             $$("[data-handler='selectDay']").findBy(Condition.text("20")).click();
             bookingPage.pushPayButton();
             errorPopup.errorPopupDisplay();

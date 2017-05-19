@@ -1,5 +1,6 @@
-package Car;
+package Tickets.car;
 
+import Tickets.BaseTest;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
@@ -11,7 +12,7 @@ import org.junit.Test;
 
 import static com.codeborne.selenide.Selenide.*;
 
-public class Car extends BaseTest {
+public class CarTests extends BaseTest {
 
     String mail = "kurinniy.a@ki-technology.ru";
     String pass = "aktest";
@@ -105,9 +106,9 @@ public class Car extends BaseTest {
 
         $("[class='booking_price_button'] input").click();
         $("#acceptIATA > div").hover().click();
-        //$("[class='booking_price_button'] input").click();
-        //$(".btn cancel js-magnific-link").shouldBe(Condition.visible).click();
-        //$(".popup_cancel__confirm").shouldBe(Condition.visible).click();
+        $("[class='booking_price_button'] input").click();
+        $(".btn cancel js-magnific-link").shouldBe(Condition.visible).click();
+        $(".popup_cancel__confirm").shouldBe(Condition.visible).click();
 
     }
 

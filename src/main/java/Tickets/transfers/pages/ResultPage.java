@@ -1,6 +1,6 @@
-package Transfers.pages;
+package Tickets.transfers.pages;
 
-import Transfers.components.SearchForm;
+import Tickets.transfers.components.SearchForm;
 import com.codeborne.selenide.Condition;
 
 import static com.codeborne.selenide.Selenide.$;
