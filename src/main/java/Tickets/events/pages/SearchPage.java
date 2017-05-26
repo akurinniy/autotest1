@@ -5,7 +5,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class SearchPage {
 
     public SearchPage selectCity() {
-        $("[class='select_city chosen-select-no-search']").setValue("ส่ๅโ").pressEnter();
+        $("[class='search js-search-form']").setValue("ส่ๅโ").pressEnter();
         return this;
     }
 
